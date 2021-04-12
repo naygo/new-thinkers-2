@@ -79,3 +79,76 @@ console.log(participante)
 
 **Playground Link:** [Provided](https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgMJypYU4BEICSAJhOMEXCcgN4BQyDy5lEAXMiAK4C2ARtAG56jEAHtubZAGcwUUAHMhjDj2ij2MuSEW0AvrVoIANnClTkABQhnRcJtwAORiBPDn0mCNjyESZCiR0ysIMzCTsXHzQIRzikpoKMZFqGrKJwcoIoiCanAhgolAAFOTsHlg4+MSkYGEQAJQ0McpgABbAUgB0dcgAvExE3QEQzYxtHZ1iEn0Dk3GjDONdyVCiM+STqqsx+jFwIBTFRB1g+wjAcACi3ACyELKiUgD8ETz8UPWpWvJNysrAMCKAEJjjIzhdrncHlJ6gs-lB7pwoCBkAByADKcGwyAchWQcAAtwAaaQuZCtQp2Bw4ZAAN1ERlOUFRcIgRikKAByCKoNOIHOV1u91W5gAPMgAKwABilsL+8uQCLASJRqIAKgBDnHQAok3iU5BGDUsuFKlVogBqcG4j0NWv2hxZyl2yngJmKnzponIvwVWRyDIgnSMonkRVRACEjcheNHY8a5Yx9LswABPBwoAByolOMwAjMgAD7IABMReQAGZywAWcsSgzGUzmCwYWrnBz7SC4UQR3vICAAD0gB2b1iktiaSRzcDV06MryiUBmUoMmWyuXyhRKRDKra8lV8NTqjSCCqknAzxXIiYYLsY9KZRTEp3Y2dOnvpPtP8qWc1Os9OIwAGogJ2PQG3XMBtRsOx+hACAAHdLDHWwimoAYWHYPMAE4SSmSRUUzOBUxMVE8K2dQ0RuABxCtqxLOjUWQXRYX9cdnGDUMigzGDYUMSCcVbYB207FA4MQywhJE8AIG7XsIzQjDwmQHC8LidhCOI0jyIkVYNJouiGOrJiWNoDtMGE4AOxkzoHwwIo81Y9dA04sNzLbKzRPqIA)
       
+
+## Anotações Aula 5
+
+
+```ts
+const users = [{ id: 1, name: 'Nayla' }, { id: 2, name: 'Matheus' }]
+
+const buscarUsers = (id: number) => {
+    return new Promise((resolve, reject) => {
+
+        setTimeout(() => {
+            const user = users.find((u) => u.id === id)
+            
+            if(user)
+                resolve(user)
+            reject('Usuário não encontrado')
+
+        }, 2000)
+    })
+}
+
+const main = async () => {
+    try {
+        const user = await buscarUsers(1)
+        console.log(user)
+    } catch(err) {
+        console.log(err)
+    }
+}
+
+buscarUsers(1)
+    .then((user) => console.log(user))
+    .catch((err) => console.log(err))
+
+
+main()
+```
+
+
+
+<details><summary><b>Output</b></summary>
+
+```ts
+"use strict";
+const users = [{ id: 1, name: 'Nayla' }, { id: 2, name: 'Matheus' }];
+const buscarUsers = (id) => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const user = users.find((u) => u.id === id);
+            if (user)
+                resolve(user);
+            reject('Usuário não encontrado');
+        }, 2000);
+    });
+};
+const main = async () => {
+    try {
+        const user = await buscarUsers(1);
+        console.log(user);
+    }
+    catch (err) {
+        console.log(err);
+    }
+};
+buscarUsers(1)
+    .then((user) => console.log(user))
+    .catch((err) => console.log(err));
+main();
+
+```
+
+**Playground Link:** [Provided](https://www.typescriptlang.org/play?ssl=1&ssc=1&pln=31&pc=7#code/MYewdgzgLgBArhApgJwjAvDA2gbxgSwBMAuGARgBoYwBDAW0VIHIA5GgTwBsamYBfKniKkATFVoNmAWRpQAFogS8+AXQBQa0JFgAjBMBrIAqklQYYACmHU4dHSgCUGAHwwcamJ5jJEUOMjBqRAB3GAAFZBA6fCQLCx8IEE4AN0QqHwArRGAoJ3RXdw8vYqQoABV8BhA4KDi8gqLippgtaHhTcwQUCAA6ADN8MEI4uHr4HqIMdEwiB0bmr3mFgj6LLuQ55eWEpNS1002tz0zs2qYTOABD5HwQagBju8QwLShkGkIQJjmlrwEYEQABmBh08fDmfA0rVgdBog3MNAg7BeljG7mKb3Ybl+nmh7RQCOCcN0+kMJm6FjIoKarSSiB6nBAAHN9o55nwWrJgHILCgNtjlrTOPTGSy+dTIZC1HoIAZjKYIJTqT15M8RgcXC1wIlhQzmayNsqDFBuXFxZqhSL9eKfmpYYMLA4gA)
+      

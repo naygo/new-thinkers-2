@@ -1,7 +1,9 @@
 import { BadRequestException, ConflictException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
+import { iRegexp } from 'sequelize/types/lib/operators';
 
 import { CreateUserDto } from './dto/create-user.dto';
+import { FindUsersDto } from './dto/find-users.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './user.model';
 
@@ -13,15 +15,20 @@ export class UserService {
         private userModel: typeof User
     ) {}
 
-    async readUsers() {
-        return this.userModel.findAll();
+
+    findUsers(findUsersDto: FindUsersDto): Promise<User[]> {
+        const where: any ={};
+
+        if(findUsersDto.name) 
+            where.name = findUsersDto.name;
+
+        if (findUsersDto.email) 
+            where.email = findUsersDto.email;
+
+        return this.userModel.findAll({ where });
     }
 
-    async readUser(id: number) {
-        return this.userModel.findOne({ where: { id } });
-    }
-
-    async createUser(createUserDto: CreateUserDto) {
+    async createUser(createUserDto: CreateUserDto): Promise<User> {
         const user = await this.userModel.findOne({ 
             where: { email: createUserDto.email } 
         });
@@ -32,14 +39,11 @@ export class UserService {
         return this.userModel.create(createUserDto);
     }
 
-    async updateUser(id: number, updateUserDto: UpdateUserDto) {
+    updateUser(id: number, updateUserDto: UpdateUserDto) {
         return this.userModel.update(updateUserDto, { where: { id } });
     }
 
-    async deleteUser(id: number) {
-        const user = await this.userModel.findOne({ where: { id } });
-        await user.destroy();
-
-        return user;
+    deleteUser(id: number) {
+      return this.userModel.destroy({ where: { id } });
     }
 }

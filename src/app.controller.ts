@@ -9,4 +9,8 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
+
+  sum(x: number, y: number) {
+    return x + y;
+  }
 }

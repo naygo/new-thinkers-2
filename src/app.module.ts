@@ -5,6 +5,8 @@ import { AppService } from './app.service';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { UserModule } from './user/user.module';
 import { User } from './user/user.model';
+import { TaskController } from './user/task/task.controller';
+import { TaskModule } from './user/task/task.module';
 
 @Module({
   imports: [
@@ -20,8 +22,9 @@ import { User } from './user/user.model';
       autoLoadModels: true
     }),
     UserModule,
+    TaskModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, TaskController],
   providers: [AppService],
 })
 export class AppModule {}

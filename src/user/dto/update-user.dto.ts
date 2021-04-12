@@ -1,10 +1,7 @@
 import { IsNumberString, IsString, IsEmail, Length } from 'class-validator';
 
-export class CreateUserDto {
-    @IsString()
-    name: string;
-
-    @IsEmail(undefined, { message: 'O email deve ter o formato correto' })
+export class UpdateUserDto {
+     @IsEmail(undefined, { message: 'O email deve ter o formato correto' })
     email: string;
 
     @IsNumberString()

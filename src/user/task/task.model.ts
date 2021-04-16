@@ -1,4 +1,5 @@
 import { BelongsTo, Column, ForeignKey, Model, Table, PrimaryKey, IsUUID, DataType, Default } from 'sequelize-typescript';
+import { IsISO8601 } from 'class-validator';
 import { User } from '../user.model';
 
 
@@ -14,6 +15,7 @@ export class Task extends Model {
   @Column
   description: string;
 
+  @IsISO8601()
   @Column
   date: Date;
 

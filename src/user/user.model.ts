@@ -23,5 +23,5 @@ export class User extends Model {
   phone: string;
 
   @HasMany(() => Task)
-  task: Task[];
+  tasks: Task[];
 }

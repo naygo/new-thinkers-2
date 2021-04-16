@@ -12,7 +12,6 @@ export class UserController {
         private userService: UserService,
     ) {}
     
-    
    @Get()
     findUser(@Query() findUsersDto: FindUsersDto) {
         return this.userService.findUsers(findUsersDto);
@@ -24,13 +23,13 @@ export class UserController {
     }
 
     @Put(':id')
-    updateUser(@Body() updateUserDto: UpdateUserDto, @Param('id') id:number) {
-        return this.userService.updateUser(+id, updateUserDto);
+    updateUser(@Body() updateUserDto: UpdateUserDto, @Param('id') id:string) {
+        return this.userService.updateUser(id, updateUserDto);
     }
 
     @Delete(':id')
-    async deleteUser(@Param('id') id: number): Promise<number> {
-        return await this.userService.deleteUser(+id);
+    async deleteUser(@Param('id') id: string): Promise<number> {
+        return await this.userService.deleteUser(id);
     }
     
 }

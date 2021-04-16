@@ -1,6 +1,5 @@
-import { BadRequestException, ConflictException, Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { iRegexp } from 'sequelize/types/lib/operators';
 
 import { CreateUserDto } from './dto/create-user.dto';
 import { FindUsersDto } from './dto/find-users.dto';
@@ -43,11 +42,11 @@ export class UserService {
         return this.userModel.create(createUserDto);
     }
 
-    updateUser(id: number, updateUserDto: UpdateUserDto) {
+    updateUser(id: string, updateUserDto: UpdateUserDto) {
         return this.userModel.update(updateUserDto, { where: { id } });
     }
 
-    deleteUser(id: number) {
+    deleteUser(id: string) {
       return this.userModel.destroy({ where: { id } });
     }
 }
